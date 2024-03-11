@@ -1,3 +1,5 @@
+- take a view about shaka player
+
 # Projeto base da JS Expert Week
 
 - Acesse o [index](./public/index/index.html) para visualizar a lista de titulos
