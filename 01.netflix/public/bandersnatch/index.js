@@ -7,10 +7,15 @@ async function main() {
   const host = isLocal ? manifestJSON.localHost : manifestJSON.productionHost;
   const videoComponent = new VideoComponent();
   const network = new Network({ host });
-  const videoPlayer = new VideoMediaPlayer({ manifestJSON, network });
+  const videoPlayer = new VideoMediaPlayer({
+    manifestJSON,
+    network,
+    videoComponent,
+  });
 
   videoPlayer.initializeCodec();
   videoComponent.initializePlayer();
+  window.nextChunk = (data) => videoPlayer.nextChunck(data);
 }
 
 window.onload = main;
