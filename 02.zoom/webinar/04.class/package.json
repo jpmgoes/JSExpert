@@ -1,0 +1,21 @@
+{
+  "name": "04.class",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha --parallel --exit ./test/",
+    "test:dev": "npx mocha --parallel -w",
+    "test:cov": "npx nyc --check-coverage --instrument --reporter=html --reporter=text npm test",
+    "start": "node ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.4.1",
+    "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
+    "sinon": "^9.2.4"
+  }
+}
