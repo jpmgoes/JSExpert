@@ -2,6 +2,7 @@ const assert = require("node:assert");
 const { describe, it, before, afterEach } = require("mocha");
 const { createSandbox, SinonSpy } = require("sinon");
 const Pagination = require("../src/pagination");
+const Request = require("../src/request");
 
 describe("Pagination tests", () => {
   let sandbox = createSandbox();
@@ -13,6 +14,51 @@ describe("Pagination tests", () => {
   afterEach(() => sandbox.restore());
 
   describe("#Pagination", () => {
+    describe("instance", () => {
+      it("should have default options on Pagination instance", () => {
+        const pagination = new Pagination();
+        const expectedProperties = {
+          maxRetries: 4,
+          retryTimeout: 1000,
+          maxRequestTimeout: 1000,
+          threshold: 200,
+        };
+
+        assert.ok(pagination.request instanceof Request);
+        Reflect.deleteProperty(pagination, "request");
+
+        function getEntries(item) {
+          return Object.entries(item);
+        }
+
+        assert.deepStrictEqual(
+          getEntries(pagination),
+          getEntries(expectedProperties),
+        );
+      });
+
+      it("should have default options on Pagination instance 2", () => {
+        const params = {
+          maxRetries: 4,
+          retryTimeout: 1000,
+          maxRequestTimeout: 1000,
+          threshold: 200,
+        };
+
+        const pagination = new Pagination(params);
+        const expectedProperties = {
+          request: {},
+          ...params,
+        };
+
+        assert.ok(pagination.request instanceof Request);
+        assert.deepStrictEqual(
+          JSON.stringify(pagination),
+          JSON.stringify(expectedProperties),
+        );
+      });
+    });
+
     describe("#sleep", () => {
       it("should be a promise and not return values", async () => {
         const clock = sandbox.useFakeTimers();
