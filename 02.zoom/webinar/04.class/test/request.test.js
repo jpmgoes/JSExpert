@@ -1,7 +1,6 @@
 const assert = require("node:assert");
 const Events = require("node:events");
 const { describe, it, before, afterEach } = require("mocha");
-const { expect } = require("chai");
 const { createSandbox } = require("sinon");
 const Request = require("../src/request");
 
